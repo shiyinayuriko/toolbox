@@ -9,9 +9,11 @@ httpCheck = re.compile(r'(https?|ftp|file)://[-A-Za-z0-9+&@  # /%?=~_|!:,.;]+[-A
 
 
 def dealwithFile(sourceFile):
-    uploader = lychee.lychee("shiyinayuriko", "*", albumName="啊啊是")
     dirname = os.path.dirname(sourceFile)
     tartgetFile = os.path.splitext(sourceFile)[0] + "_out" + os.path.splitext(sourceFile)[1]
+    albumName = os.path.basename(dirname)
+    print("album name is ", albumName)
+    uploader = lychee.lychee(albumName=albumName)
 
     def imageRepl(match):
         matchStr = match.group()
@@ -27,7 +29,7 @@ def dealwithFile(sourceFile):
         if(not os.path.isfile(picUrl)):
             print("not exchange file not exist:", match.group(2))
             return matchStr
-            
+
         try:
             targetUrl = uploader.getUrlStr(picUrl)
         except Exception:

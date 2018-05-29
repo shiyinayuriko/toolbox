@@ -4,20 +4,21 @@ import requests
 # pip install certifi
 
 import os
+import config
 
 
 class lychee:
     # session
-    baseUrl = "*"
+    baseUrl = config.lycheeServer
     baseIndexUrl = baseUrl + "/php/index.php"
+    userName = config.username
+    password = config.password
 
     albumIDCache = {}
     photoUrlCache = {}
 
-    def __init__(self, userName, password, albumName="defaultAlbum"):
+    def __init__(self, albumName="defaultAlbum"):
         self.albumName = albumName
-        self.userName = userName
-        self.password = password
         self.session = requests.Session()
         self.__login()
 
@@ -64,8 +65,9 @@ class lychee:
             payload = {'function': 'Albums::get'}
             r = self.session.post(self.baseIndexUrl, data=payload)
             jsonResp = r.json()
-            for album in jsonResp['albums']:
-                self.albumIDCache[album["title"]] = album["id"]
+            if (jsonResp['albums']):
+                for album in jsonResp['albums']:
+                    self.albumIDCache[album["title"]] = album["id"]
         except AttributeError:
             print("jsonError")
         except KeyError:
@@ -83,7 +85,7 @@ class lychee:
 
         payload = {'function': 'Album::add', 'title': albumName}
         r = self.session.post(self.baseIndexUrl, data=payload)
-        if(r.json() is int):
+        if(isinstance(r.json(), int)):
             self.albumIDCache[albumName] = r.json()
             return r.json()
 
