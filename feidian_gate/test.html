@@ -29,11 +29,14 @@
 
     <div class="col-md-4 template" id="template-card">
         <div class="card">
-            <h5 class="card-header">Featured</h5>
+            <h4 class="card-header" id="name">群名</h4>
             <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h6 class="card-title" id="gid">
+                    <b>群号</b>
+                </h6>
+                <p class="card-text" id="desc">描述</p>
+                <a href="#" class="btn btn-primary" id="autoAdd">一键加群</a>
+                <a href="#" class="btn btn-primary copy" data-toggle="tooltip" data-placement="right" data-original-title="Tooltip on right" id="copy">复制群号</a>
             </div>
         </div>
     </div>
@@ -48,17 +51,48 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
+            var gropuData = [
+                {
+                    name: "第⑨动画研究室",
+                    gid: "295805982",
+                    desc: "desc",
+                    url: "https://jq.qq.com/?_wv=1027&k=5PcqYP0"
+                }, {
+                    name: "第⑨动画研究室",
+                    gid: "295805982",
+                    desc: "desc",
+                    url: "https://jq.qq.com/?_wv=1027&k=5PcqYP0"
+                }, {
+                    name: "第⑨动画研究室",
+                    gid: "295805982",
+                    desc: "desc",
+                    url: "https://jq.qq.com/?_wv=1027&k=5PcqYP0"
+                }, {
+                    name: "第⑨动画研究室",
+                    gid: "295805982",
+                    desc: "desc",
+                    url: "https://jq.qq.com/?_wv=1027&k=5PcqYP0"
+                },
+            ]
 
-            for(i=0;i<10;i++){
-                insertCard();
+            for (i in gropuData) {
+                insertCard(gropuData[i]);
             }
+            // new ClipboardJS(".copy");
 
         });
-        function insertCard() {
+        function insertCard(group) {
             var tmp = $("#template-card").clone();
             tmp.removeClass("template");
+            tmp.find("#name").text(group.name);
+            tmp.find("#desc").text(group.desc);
+            tmp.find("#gid").text(group.gid);
+            tmp.find("#autoAdd").attr("href", group.url);
+            tmp.find("#copy").attr("data-clipboard-text", group.gid);
             $("#main-list").append(tmp);
         }
     </script>
