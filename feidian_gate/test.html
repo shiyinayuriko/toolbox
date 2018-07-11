@@ -35,7 +35,8 @@
                 </h6>
                 <p class="card-text" id="desc">描述</p>
                 <a href="#" class="btn btn-primary" id="autoAdd">一键加群</a>
-                <a href="#" class="btn btn-primary copy" data-toggle="tooltip" data-placement="right" data-original-title="Tooltip on right" id="copy">复制群号</a>
+                <a href="#" class="btn btn-primary copy" data-toggle="tooltip" data-trigger="click" data-placement="right" data-original-title="复制成功"
+                    id="copy">复制群号</a>
             </div>
         </div>
     </div>
@@ -75,7 +76,7 @@
             for (i in gropuData) {
                 insertCard(gropuData[i]);
             }
-            // new ClipboardJS(".copy");
+            new ClipboardJS(".copy");
 
         });
         function insertCard(group) {
@@ -85,7 +86,15 @@
             tmp.find("#desc").text(group.desc);
             tmp.find("#gid").text(group.gid);
             tmp.find("#autoAdd").attr("href", group.url);
-            tmp.find("#copy").attr("data-clipboard-text", group.gid);
+            var copy = tmp.find("#copy");
+            copy.attr("data-clipboard-text", group.gid);
+            copy.tooltip();
+
+            copy.on('shown.bs.tooltip', function (e) {
+                setTimeout(function () {
+                    $(e.target).tooltip('hide');
+                }, 1000);
+            });
             $("#main-list").append(tmp);
         }
     </script>
