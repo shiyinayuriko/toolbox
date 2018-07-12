@@ -13,6 +13,14 @@
         .template {
             display: none
         }
+
+        .card {
+            margin-top: 15px
+        }
+
+        .btn {
+            margin-bottom: 5px
+        }
     </style>
     <title>Hello, world!</title>
 </head>
@@ -26,7 +34,7 @@
         </div>
     </div>
 
-    <div class="col-md-4 template" id="template-card">
+    <div class="col-xl-3 col-lg-4 col-sm-6 template" id="template-card">
         <div class="card">
             <h4 class="card-header" id="name">群名</h4>
             <div class="card-body">
@@ -34,7 +42,7 @@
                     <b>群号</b>
                 </h6>
                 <p class="card-text" id="desc">描述</p>
-                <a href="#" class="btn btn-primary" id="autoAdd">一键加群</a>
+                <a href="#" class="btn btn-primary" id="autoAdd" target="_blank">一键加群</a>
                 <a href="#" class="btn btn-primary copy" data-toggle="tooltip" data-trigger="click" data-placement="right" data-original-title="复制成功"
                     id="copy">复制群号</a>
             </div>
