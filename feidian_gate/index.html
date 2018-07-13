@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-cn">
 
 <head>
     <!-- Required meta tags -->
@@ -22,13 +22,13 @@
             margin-bottom: 5px
         }
     </style>
-    <title>Hello, world!</title>
+    <title>沸点传送门</title>
 </head>
 
 <body>
     <div class="container">
         <nav class="navbar navbar-dark bg-primary">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#">沸点传送门</a>
         </nav>
         <div id="main-list" class="row">
         </div>
@@ -43,7 +43,7 @@
                 </h6>
                 <p class="card-text" id="desc">描述</p>
                 <a href="#" class="btn btn-primary" id="autoAdd" target="_blank">一键加群</a>
-                <a href="#" class="btn btn-primary copy" data-toggle="tooltip" data-trigger="click" data-placement="right" data-original-title="复制成功"
+                <a href="#" class="btn btn-outline-secondary copy" data-toggle="tooltip" data-trigger="click" data-placement="right" data-original-title="复制成功"
                     id="copy">复制群号</a>
             </div>
         </div>
@@ -101,7 +101,7 @@
             copy.on('shown.bs.tooltip', function (e) {
                 setTimeout(function () {
                     $(e.target).tooltip('hide');
-                }, 1000);
+                }, 500);
             });
             $("#main-list").append(tmp);
         }
