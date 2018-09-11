@@ -11,9 +11,10 @@ httpCheck = re.compile(r'(https?|ftp|file)://[-A-Za-z0-9+&@  # /%?=~_|!:,.;]+[-A
 counter = [0,0,0]
 
 def dealwithFile(sourceFile):
-    dirname = os.path.dirname(sourceFile) + "/"
+    dirname = os.path.dirname(sourceFile) 
     tartgetFile = os.path.splitext(sourceFile)[0] + "_out" + os.path.splitext(sourceFile)[1]
     albumName = os.path.basename(dirname)
+    dirname = dirname + "\\"
     print("album name is ", albumName)
     uploader = lychee.lychee(albumName=albumName)
 
