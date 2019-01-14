@@ -14,7 +14,7 @@ def dealwithFile(sourceFile):
     dirname = os.path.dirname(sourceFile) 
     tartgetFile = os.path.splitext(sourceFile)[0] + "_out" + os.path.splitext(sourceFile)[1]
     albumName = os.path.basename(dirname)
-    dirname = dirname + "\\"
+    dirname = dirname + "/"
     print("album name is ", albumName)
     uploader = lychee.lychee(albumName=albumName)
 
@@ -22,6 +22,8 @@ def dealwithFile(sourceFile):
         matchStr = match.group()
 
         picUrl = match.group(2)
+        picUrl = picUrl.replace('\\', '/')
+
         if(httpCheck.match(picUrl)):
             print("already Url skip:", match.group(2))
             counter[1] += 1
