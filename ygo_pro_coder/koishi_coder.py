@@ -1,13 +1,33 @@
-import struct
+import sys
 import base64
-import array
 
-buf1 = 89631139
-bin_buf1 = struct.pack('i', buf1)  
-ret1 = struct.unpack('i', bin_buf1)
-# print(bin_buf1, '  <====>  ', ret1)
-# ba64 = base64.b64encode(bin_buf1)
-# print(ba64)
-ba46 = base64.b64decode("NwAAAAAAAACEuDgAhLg4AIS4OAD796EE+/ehBM4p3QK8xs4BvMbOAa2cjAOEpBECcmBLAHJgSwByYEsAUveKA1L3igM+hCgEr147Aq9eOwIqlWUBKpVlARsTBQTvghYALHi0ADdnpQI3Z6UCN2elAuOwKgOuyz4DxanaBKrsYQCq7GEAXWneAv6jngT+o54E/qOeBLnWSgDblWsC25VrAgAuDQUALg0Fj1kIBRmzdQQZs3UEDuolAcLDNgG25+IC4ExpBPU8qQUs9CMDt79iBJki5wHGM2MDtfABBU/h7AR0ky4F")
-ba46 = array.array("I", ba46)
-print(ba46)
+if(sys.argv.__len__() == 1):
+    sourceFile = input("input source file\n")
+else:
+    sourceFile = sys.argv[1]
+
+counter = [0,0]
+cardlist = []
+currentCounter = 0
+
+with open(sourceFile, "r", encoding="utf8") as f:
+    for line in f:
+        if line.strip().isdigit():
+            card = int(line)
+            cardlist.append(card)
+            counter[currentCounter] += 1
+        elif line.startswith("!side"):
+            currentCounter+=1
+
+
+print(cardlist)
+print(counter)
+
+byteArray = bytearray()
+for c in counter:
+    byteArray+= c.to_bytes(4,byteorder="little")
+for c in cardlist:
+    byteArray+= c.to_bytes(4,byteorder="little")
+
+b64 = base64.b64encode(byteArray)
+print(b64)
